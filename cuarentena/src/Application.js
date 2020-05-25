@@ -1,6 +1,39 @@
 import React, { Component } from 'react';
 
 class Application extends Component {
+    //Metodo constructor, recibe un argumento props
+    constructor(props){
+        super(props);
+    }
+
+        componentWillMount(props, state){
+
+
+        }
+
+      
+
+
+        componentWillReceiveProps(props){
+
+        }
+
+        componentWillUpdate(props, state){
+            if (this.props.name!==props.name) {
+                //hacer algo
+            }
+        }
+        //Esta es la manera mas apropiada, los will estan / seran deprecados
+        componentDidUpdate(props, state){
+            
+        }
+
+        componentDidMount(props, state){
+            console.log("Mounted with", props, state);
+        }
+
+
+
 
     //render retorna el html
     render() {
