@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HighScore from './HighScore';
 
 class Application extends Component {
 //Algunos metodos de la clase App.
@@ -36,6 +37,14 @@ class Application extends Component {
 
         }
     }
+    //Recibe un evento como parametro, el metodo va a resetear el state a count 0 y overTen falso
+    resetCount= (e)=>{
+        console.log("event is", e);
+        this.setState({
+            count:0,
+            overTen:false
+        })
+    }
 
     //render retorna el html
     render() {
@@ -55,8 +64,10 @@ class Application extends Component {
        return (
         <div> 
        <h1>Clickeaste el boton {count} veces</h1>
-       {(this.state.overTen)?<h3>Beat highscore of 10!</h3>:null}
-      
+        <HighScore
+            overTen={this.state.overTen}
+            onReset={this.resetCount}
+        />
        <span><button onClick={()=>this.handleClick()}>Clickeame!</button></span>
        <p>{name}</p>
        </div>  
