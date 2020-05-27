@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import HighScore from './HighScore';
-import './css/style.css'
+import './css/style.css' //Agregamos css
 
 class Application extends Component {
 //Algunos metodos de la clase App.
