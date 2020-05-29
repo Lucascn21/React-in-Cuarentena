@@ -1,0 +1,30 @@
+.column-3 {
+    width: 75%;
+    float: left;
+}
+
+.column-2 {
+    width: 50%;
+    float: left;
+}
+
+.column-1 {
+    width: 25%;
+    float: left;
+}
+
+button.calc-button {
+    width: 99%;
+    height: 100px;
+    border: 2px solid grey;
+    font-size: 32px;
+}
+
+input.result {
+    height: 100px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    font-size: 32px;
+    padding: 10px;
+}
