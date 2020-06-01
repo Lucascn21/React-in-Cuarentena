@@ -8,19 +8,38 @@ class App extends Component {
       super(props);
       this.state ={
         current:'',
-        previous:[]
+        previous:[],
+        nextIsReset: false
       }
   }
 
   reset = () =>{
-    this.setState({result:0});
+    this.setState({current:0, previous:[],nextIsReset:false});
   }
 
   addToCurrent = (symbol)=>{
+    if(['/','-','+','*'].indexOf(symbol)>-1){
 
-    this.setState({current: this.state.current + symbol});
+      let {previous}=this.state;
+      previous.push(this.state.current+symbol);
+      this.setState({previous, nextIsReset: true});
+    } else {
+      if((this.state.current==='0'&& symbol!=='.')||this.state.nextIsReset){
+        this.setState({current: symbol, nextIsReset: false});
+      } else{
+        this.setState({current: this.state.current + symbol});
+      }
+     
+    }
   }
 
+  calculate =(symbol)=>{
+    let{current, previous,nextIsReset} = this.state;
+    if(previous.length>0){
+      current=eval(previous[previous.length-1]+current);
+      this.setState({current, previous:[], nextIsReset: true});  
+    }
+  }
 
   render() {
     const buttons=[
@@ -40,10 +59,11 @@ class App extends Component {
        {symbol:'+', cols: 1, action: this.addToCurrent},
        {symbol:'0', cols: 2, action: this.addToCurrent},
        {symbol:'.', cols: 1, action: this.addToCurrent},
-       {symbol:'=', cols: 1, action: this.addToCurrent}
+       {symbol:'=', cols: 1, action: this.calculate}
     ];
     return(
     <div className="App">
+      {this.state.previous.length>0 ? <div className='floaty-last'>{this.state.previous[this.state.previous.length-1]} </div>: null}
       <input className='result' type='text' value={this.state.current}></input>
 
       {buttons.map((btn, i) => {
